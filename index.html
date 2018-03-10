@@ -133,7 +133,7 @@
         <!--Title and Logo-->
         <header>
     <div class="logo">
-        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        <a href="/"><i class="logo-icon fa fa-optin-monster" aria-hidden="true"></i></a>
         
             <h1 id="main-title" class="title">dieice2030</h1>
         
@@ -157,6 +157,10 @@
             
             
             
+                <span class="category">
+                    <a href="/categories/伪·技术文章/">伪·技术文章</a>
+                </span>
+            
         </div>
     </div>
 
@@ -167,56 +171,8 @@
 <h4 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h4><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js下载地址</a><br>LTS为长期更新版本，Current为最新版本，看个人喜好了。下载完双击安装即可<br>在<font color="red">Custom Setup</font>这一步记得选择<font color="red">Add to PATH</font>，可以自动配置环境变量。</p>
 <h4 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h4><p><a href="https://git-scm.com/" target="_blank" rel="noopener">Git下载地址</a><br>下载完双击安装即可  </p>
 <p><font color="red">建议选择最新版本</font>，本人就因为Git的版本难问题，在Deploy的时候纠结了老半天，最后在Github上搜索到了原因——因为Github更新了Git版本，更新了Git就解决了(还是听从了官方的建议，遇到问题请时候用在Google或者Github上搜索，百度搜索技术问题是真的不靠谱)</p>
-<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>确保你已经完成了准备工作<br>以下是安装命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i -g hexo</span><br></pre></td></tr></table></figure>
-<p><code>i</code> 是 <code>install</code> npm命令的简写，<code>hexo</code>和<code>hexo-cli</code>的区别不是很清楚，就网上结果看来是都可以的</p>
-<h2 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h2><p>可以在指定目录中新建一个用来存放个人博客数据的文件夹，在该文件夹中右键点击<code>Git Bush Here</code>  然后使用命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-<p>或者使用命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-<p>在指定文件夹中初始化</p>
-<p>新建完成后，指定文件夹的初始目录如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
-<h4 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h4><p>网站的配置信息，详细内容参考官方文档中的<a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="noopener">配置</a>部分</p>
-<h4 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h4><p>应用程序的信息。其中<a href="http://embeddedjs.com/" target="_blank" rel="noopener">EJS</a>, <a href="http://stylus-lang.com/" target="_blank" rel="noopener">Stylus</a> 和 <a href="https://daringfireball.net/projects/markdown/" target="_blank" rel="noopener">Markdown</a> renderer 为默认安装。可以根据需要增加或者删除</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"hexo-site"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.0"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"hexo"</span>: &#123;</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"3.6.0"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"hexo"</span>: <span class="string">"^3.2.0"</span>,</span><br><span class="line">    <span class="attr">"hexo-generator-archive"</span>: <span class="string">"^0.1.4"</span>,</span><br><span class="line">    <span class="attr">"hexo-generator-category"</span>: <span class="string">"^0.1.3"</span>,</span><br><span class="line">    <span class="attr">"hexo-generator-index"</span>: <span class="string">"^0.2.0"</span>,</span><br><span class="line">    <span class="attr">"hexo-generator-tag"</span>: <span class="string">"^0.2.0"</span>,</span><br><span class="line">    <span class="attr">"hexo-renderer-ejs"</span>: <span class="string">"^0.3.0"</span>,</span><br><span class="line">    <span class="attr">"hexo-renderer-marked"</span>: <span class="string">"^0.3.0"</span>,</span><br><span class="line">    <span class="attr">"hexo-renderer-stylus"</span>: <span class="string">"^0.3.1"</span>,</span><br><span class="line">    <span class="attr">"hexo-server"</span>: <span class="string">"^0.2.2"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="scaffolds（模板）"><a href="#scaffolds（模板）" class="headerlink" title="scaffolds（模板）"></a>scaffolds（模板）</h4><p>当您新建文章时，Hexo 会根据 scaffold 来建立文件。</p>
-<p>Hexo的模板是指在新建的markdown文件中默认填充的内容。例如，如果您修改scaffold/post.md中的Front-matter内容，那么每次新建一篇文章时都会包含这个修改。</p>
-<h4 id="source（资源）"><a href="#source（资源）" class="headerlink" title="source（资源）"></a>source（资源）</h4><p>存放用户资源的地方。除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
-<h4 id="themes（主题）"><a href="#themes（主题）" class="headerlink" title="themes（主题）"></a>themes（主题）</h4><p>Hexo 会根据主题来生成静态页面。</p>
-<h2 id="搭桥到Github"><a href="#搭桥到Github" class="headerlink" title="搭桥到Github"></a>搭桥到Github</h2><ul>
-<li>新建一个Github账号</li>
-<li>创建一个repository（仓库），形如<code>XXX.github.io</code>,其中<code>XXX</code>为你的github名称</li>
-<li>配置Git环境</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"XXX"</span> <span class="comment">#设置全局用户名</span></span><br><span class="line">$ git config --global user.email <span class="string">"XXX@example.mail"</span> <span class="comment">#设置全局邮箱</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>创建SSH<br>windows的命令行没有自带ssh工具，直接用GitBash比较方便。使用命令</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></span><br></pre></td></tr></table></figure>
-<p>根据生成信息，在对应文件夹中找到<code>id_rsa.pub</code>，在github中依次点击<code>头像-&gt;settings-&gt;SSH and GPG keys-&gt;New SSH key</code>，将文件的内容复制到github中。</p>
-<h2 id="本地发布"><a href="#本地发布" class="headerlink" title="本地发布"></a>本地发布</h2><p>使用命令</p>
-<blockquote>
-<p>$ npm i hexo-server</p>
-</blockquote>
-<p>安装server模块</p>
-<p>使用命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean <span class="comment">#清除相关文件</span></span><br><span class="line">$ hexo generate <span class="comment">#生成相关文件</span></span><br><span class="line">$ hexo server <span class="comment">#本地发布</span></span><br></pre></td></tr></table></figure>
-<p>进行本地发布，然后就可以在浏览器中输入<code>http://localhost:4000</code>看到本地版个人博客了</p>
-<h2 id="上传到Github"><a href="#上传到Github" class="headerlink" title="上传到Github"></a>上传到Github</h2><h4 id="配置发布信息"><a href="#配置发布信息" class="headerlink" title="配置发布信息"></a>配置发布信息</h4><p>在创建的博客文件夹中，打开 <code>_config.yml</code>，按照以下形式配置</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/XXX/XXX.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-<p>使用命令</p>
-<blockquote>
-<p>npm install hexo-deployer-git –save</p>
-</blockquote>
-<p>安装deployer-git模块</p>
-<p>使用命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean <span class="comment">#清除相关文件</span></span><br><span class="line">$ hexo generate <span class="comment">#生成相关文件</span></span><br><span class="line">$ hexo deploy <span class="comment">#发布并上传</span></span><br></pre></td></tr></table></figure>
-<p>发布并上传，然后就可以在浏览器中输入<code>http://XXX.github.io</code>看到发布在Internet上的个人博客了！</p>
-
         </div>
+        <a href="/2018/03/09/搭建自己的博客/" class="read-more">Read More</a>
     
 
 </div>
@@ -303,7 +259,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
                 <h2>About</h2>
                 <p>
-                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                    
                 </p>
             </div>
             
@@ -329,13 +285,24 @@
 
 
             
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/伪·技术文章/">伪·技术文章</a>
+        </li>
+        
+    </ul>
+</div>
+
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <ul class="list-inline footer-social-icons">
                     
                     <li class="list-inline-item">
-                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                        <a href="https://github.com/dieice2030">
                             <span class="footer-icon-container">
                                 <i class="fa fa-github"></i>
                             </span>
@@ -429,7 +396,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="footer-copyright">
-                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                    dieice2030
                 </div>
             </div>
         </div>
