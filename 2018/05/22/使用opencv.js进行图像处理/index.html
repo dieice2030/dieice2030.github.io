@@ -10,6 +10,8 @@
 
     <!--Description-->
     
+        <meta name="description" content="本来是打算翻译官方文档中OpenCV.js部分，然而实际操作过程中编译没有成功，故水之。">
+    
 
     <!--Author-->
     
@@ -18,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="dieice2030"/>
+        <meta property="og:title" content="使用OpenCV.js进行图像处理"/>
     
 
     <!--Open Graph Description-->
@@ -29,7 +31,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -40,7 +42,7 @@
 
     <!-- Title -->
     
-    <title>html - dieice2030</title>
+    <title>使用OpenCV.js进行图像处理 - dieice2030</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -127,9 +129,7 @@
 <div class="container">
 
     <!-- Main Content -->
-    
-
-<div class="row">
+    <div class="row">
     <div class="col-sm-12">
 
         <!--Title and Logo-->
@@ -137,25 +137,60 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-optin-monster" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">#html</h1>
-        
     </div>
 </header>
 
-        <section class="main archive-container">
+        <section class="main">
             
-                <div class="archive-post">
-    <a href="/2018/03/22/HS-Project（一）/">
-        <span class="archive-date">
-            Mar 2018
-        </span>
-        HS Project（一）
-    </a>
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/05/22/使用opencv.js进行图像处理/">
+                使用OpenCV.js进行图像处理
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-22</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/伪·技术文章/">伪·技术文章</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <p>本来是打算翻译官方文档中OpenCV.js部分，然而实际操作过程中编译没有成功，故水之。<br><a id="more"></a></p>
+<h1 id="安装Emscripten"><a href="#安装Emscripten" class="headerlink" title="安装Emscripten"></a>安装<code>Emscripten</code></h1><p><code>Emscripten</code> 是一个LLVM-JavaScript便与你一起。我们用它来构建OpenCV.js。<br>安装Emscripten, 参考<a href="">Emscripten SDK指南</a>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/juj/emsdk.git</span><br><span class="line"><span class="built_in">cd</span> emsdk</span><br><span class="line">emsdk install latest</span><br><span class="line">emsdk activate latest</span><br></pre></td></tr></table></figure>
+<p>添加环境变量<code>EMSCRIPTEN</code>，值为<code>Emscripten</code>的路径</p>
+<h1 id="获得OpenCV源码"><a href="#获得OpenCV源码" class="headerlink" title="获得OpenCV源码"></a>获得OpenCV源码</h1><p>可以从官网下载<code>ZIP</code>，也可以直接<code>git clone</code></p>
+<h1 id="使用源码构建OpenCV-js"><a href="#使用源码构建OpenCV-js" class="headerlink" title="使用源码构建OpenCV.js"></a>使用源码构建OpenCV.js</h1><p>需要安装<code>Python</code>和<code>CMake</code></p>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
 </div>
-            
         </section>
+
     </div>
 </div>
+
 
 </div>
 
