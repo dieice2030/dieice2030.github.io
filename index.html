@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="dieice2030">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="dieice2030"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="dieice2030"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="website" />
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary" />
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>dieice2030</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Google Analytics -->
+    
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+            <h1 id="main-title" class="title">dieice2030</h1>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2023/06/21/three-js%E4%B8%AD%E6%AD%A3%E5%8F%8D%E9%9D%A2%E9%A2%9C%E8%89%B2%E4%B8%8D%E5%90%8C/">
+                three.js中正反面颜色不同
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2023-06-21</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h2 id="一、-使用一个材质"><a href="#一、-使用一个材质" class="headerlink" title="一、 使用一个材质"></a>一、 使用一个材质</h2><p>利用材质的<code>OnBeforeCompile</code>， 例如<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">extrudeMeshMat.<span class="property">onBeforeCompile</span> = <span class="keyword">function</span>(<span class="params">shader</span>) &#123;</span><br><span class="line">  shader.<span class="property">fragmentShader</span> = shader.<span class="property">fragmentShader</span>.<span class="title function_">replace</span>(</span><br><span class="line">    <span class="string">&#x27;#include &lt;dithering_fragment&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">`</span></span><br><span class="line"><span class="string">      #ifdef OPAQUE</span></span><br><span class="line"><span class="string">      diffuseColor.a = 1.0;</span></span><br><span class="line"><span class="string">      #endif</span></span><br><span class="line"><span class="string">      </span></span><br><span class="line"><span class="string">      #ifdef USE_TRANSMISSION</span></span><br><span class="line"><span class="string">      diffuseColor.a *= material.transmissionAlpha + 0.1;</span></span><br><span class="line"><span class="string">      #endif</span></span><br><span class="line"><span class="string">      </span></span><br><span class="line"><span class="string">      if ( gl_FrontFacing ) &#123; \</span></span><br><span class="line"><span class="string">        gl_FragColor = vec4( 1.0, 0.0, 0.0, diffuseColor.a ); \</span></span><br><span class="line"><span class="string">      &#125; else &#123; \</span></span><br><span class="line"><span class="string">        gl_FragColor = vec4( 0.0, 1.0, 0.0, diffuseColor.a ); \</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">  )</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>着色器参数<code>diffuseColor</code>对应的是material.color设置的颜色，gl_FragColor对应的是最终渲染的颜色，gl_FrontFacing表示正面还是反面，在适当的位置，将gl_FragColor的初始化根据gl_FrontFacing对gl_FragColor进行不同的操作就可以得正反面颜色不同的效果</p>
+<h2 id="二、-使用材质数组"><a href="#二、-使用材质数组" class="headerlink" title="二、 使用材质数组"></a>二、 使用材质数组</h2><h3 id="1-创建材质数组，例如"><a href="#1-创建材质数组，例如" class="headerlink" title="1.  创建材质数组，例如"></a>1.  创建材质数组，例如</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> material1 = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">MeshBasicMaterial</span>(&#123;<span class="attr">color</span>: <span class="number">0xff0000</span>&#125;);</span><br><span class="line"><span class="keyword">const</span> material2 = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">MeshBasicMaterial</span>(&#123;<span class="attr">color</span>: <span class="number">0x00ff00</span>&#125;);</span><br><span class="line"><span class="keyword">const</span> materials = [material1, material2]</span><br></pre></td></tr></table></figure>
+<h3 id="2-如果有顶点索引，则遍历顶点索引，再添加反面的顶点索引；如果没有顶点索引，则遍历顶点，创建正面和反面的顶点索引。使用setIndex函数"><a href="#2-如果有顶点索引，则遍历顶点索引，再添加反面的顶点索引；如果没有顶点索引，则遍历顶点，创建正面和反面的顶点索引。使用setIndex函数" class="headerlink" title="2. 如果有顶点索引，则遍历顶点索引，再添加反面的顶点索引；如果没有顶点索引，则遍历顶点，创建正面和反面的顶点索引。使用setIndex函数"></a>2. 如果有顶点索引，则遍历顶点索引，再添加反面的顶点索引；如果没有顶点索引，则遍历顶点，创建正面和反面的顶点索引。使用setIndex函数</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> finalVertices = &lt;THREE.Vector3[]&gt;[...] // 几何体的顶点</span><br><span class="line">const geo = new THREE.BufferGeometry()</span><br><span class="line">geo.setFromPoints(finalVertices)</span><br><span class="line">// ! 计算法向量要在只有一个面的时候计算</span><br><span class="line">geo.computeVertexNormals() </span><br><span class="line">const newIndexes = &lt;number[]&gt;[]</span><br><span class="line">const count = finalVertices.length</span><br><span class="line">for(let i = 0; i &lt; count; i += 3) &#123;</span><br><span class="line">    newIndexes.push(i, i + 1, i + 2)</span><br><span class="line">&#125;</span><br><span class="line">for(let i = 0; i &lt; count; i += 3) &#123;</span><br><span class="line">    newIndexes.push(i, i + 2, i + 1)</span><br><span class="line">&#125;</span><br><span class="line">geo.setIndex(newIndexes)</span><br></pre></td></tr></table></figure>
+<h3 id="3-使用setGroup函数，将当前几何体分割成组进行渲染"><a href="#3-使用setGroup函数，将当前几何体分割成组进行渲染" class="headerlink" title="3. 使用setGroup函数，将当前几何体分割成组进行渲染"></a>3. 使用setGroup函数，将当前几何体分割成组进行渲染</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">geo.<span class="title function_">addGroup</span>(<span class="number">0</span>, count, <span class="number">0</span>)</span><br><span class="line">geo.<span class="title function_">addGroup</span>(count, count, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://bucket-ynote-online-cdn.note.youdao.com/dieice2030%40163.com%2F43BE56EE24AC47ADA8E5CA190EB5AD6A?download=doubleside%20mat.gif&amp;Signature=Gi8nGuSobLMFPpDwnFzW%2Bog55QltfsV%2BbA%2BtY%2BpvcJE%3D&amp;Expires=1687324066&amp;NOSAccessKeyId=e7d1acab859342789faa85a4b0cb4c83" alt="demo"></p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/06/21/%E8%B0%88%E5%BE%AE%E5%95%86/">
+                谈微商
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-06-21</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>个人而言，对微商非常反感，因为这些人会在朋友圈刷屏。然而不久前连手机都不会用的我妈，居然也加入了微商的行列。本文针对“归农”进行具体分析，剖析微商的本质。带有个人主观色彩的话尽量当做备注放在括号中。</p>
+        </div>
+        <a href="/2018/06/21/%E8%B0%88%E5%BE%AE%E5%95%86/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/06/08/Flag/">
+                Flag
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-06-08</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/IFE/">IFE</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>百度前端技术学院刚开课的那段时间，也是我准备开始钻研前端的时候。水平差得脸看过了百度阿里的前端面试题之后，都不知道差在哪里。可那时课程看起来似乎过于基础。现在看起来是到了可以刷一波的时候了。在没有一定的认识之前是没有资格谈论喜好的。</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/22/%E4%BD%BF%E7%94%A8opencv.js%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                使用OpenCV.js进行图像处理
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-22</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/伪·技术文章/">伪·技术文章</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>本来是打算翻译官方文档中OpenCV.js部分，然而实际操作过程中编译没有成功，故水之。<br>
+        </div>
+        <a href="/2018/05/22/%E4%BD%BF%E7%94%A8opencv.js%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/05/19/Node%E5%BC%80%E5%8F%91web%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/">
+                Node开发web入门笔记（使用Express）
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-19</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/伪·技术文章/">伪·技术文章</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>从开始折腾ASP.NET CORE到现在开始折腾Node.js。虽然已经使用ASP.NET CORE搭建过小型动态网站，但是对于HTTP协议的认识还是基本为零。不得不承认.NET的强大。但我一直认为只有对细节有足够的了解才能走得更远。</p>
+<h1 id="响应和请求"><a href="#响应和请求" class="headerlink" title="响应和请求"></a>响应和请求</h1><p>客户端（浏览器）通过URL或者页面上的交互组件向服务器发出<code>请求</code>，服务器经过处理向客户端（浏览器）返回<code>响应</code>。</p>
+<p><code>请求</code>分为<code>get</code>和<code>post</code>两种，<a href="http://www.w3school.com.cn/tags/att_form_method.asp">具体差别</a>。</p>
+<p>简单来说<code>get</code>快速，但是数据大小有限，不安全；<code>post</code>慢，但是数据没有限制，相对安全</p>
+<p>在Express中，有专门的对象用以处理不同类型的请求</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app=<span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>,<span class="title function_">response</span>(<span class="params">req,res</span>)&#123;  <span class="comment">//用以处理get请求</span></span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">app.<span class="title function_">post</span>(<span class="string">&#x27;/&#x27;</span>,<span class="title function_">response</span>(<span class="params">req,res</span>)&#123;  <span class="comment">//用以处理post请求</span></span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/03/23/%E7%AC%94%E8%AE%B0/">
+                笔记
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-03-23</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/其他/">其他</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>记录一些经常需要复制粘贴的代码</p>
+<h1 id="数据库连接字符串-EF-Core"><a href="#数据库连接字符串-EF-Core" class="headerlink" title="数据库连接字符串(EF Core)"></a>数据库连接字符串(EF Core)</h1><p>MySql</p>
+<blockquote>
+<p>Server=  ;port=  ;Database=  ;User Id =  ;Password=  ;sslmode=none</p>
+</blockquote>
+<p>SqlServer</p>
+<blockquote>
+<p>Server=  ,  ;Database=  ;User Id =  ;Password=  ;</p>
+</blockquote>
+<p>划重点<u>MySql使用<code>port</code>声明端口，SqlServer使用<code>,</code></u></p>
+<h1 id="EF-Core"><a href="#EF-Core" class="headerlink" title="EF Core"></a>EF Core</h1><h2 id="DB-First"><a href="#DB-First" class="headerlink" title="DB First"></a>DB First</h2><p>MySql<br>不贴了，对2.0支持不好，可以利用SqlServer中转</p>
+<p>SqlServer</p>
+<blockquote>
+<p>Scaffold-DbContext “Server=  ;Database=  ;User Id =  ;Password=  “ Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models</p>
+</blockquote>
+<p>SqlServer在执行操作后，需要将<code>XXXContext</code>中的<code>OnConfiguring()</code>替换为</p>
+<blockquote>
+<p>public XXXContext(DbContextOptions<XXXContext> options)   : base(options)  { }</p>
+</blockquote>
+<p>其中XXX为数据库名称</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/03/22/HS-Project%EF%BC%88%E4%B8%80%EF%BC%89/">
+                HS Project（一）
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-03-22</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/项目计划/">项目计划</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>网页版炉石助手计划</p>
+<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ol>
+<li>设计UI（包括选择对手的职业与卡组、选择自己的职业与卡组，记录对战细节情况（可选））（纯手动输入）</li>
+<li>数据系统（备选方案：MYSql、XML）</li>
+<li>实现功能<ul>
+<li>显示自己某职业与其他各职业的胜率情况（饼图或者柱形图）</li>
+<li>显示自己某职业与其他卡组的胜率情况（饼图或者柱形图）</li>
+<li>选定时间段呈现上述数据</li>
+<li>显示自己各职业的整体胜率情况（自己各职业的相互对比）</li>
+<li>显示自己各卡组的整体胜率情况（自己个卡组的相互对比）</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2018/03/09/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
+                搭建自己的博客
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-03-09</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/伪·技术文章/">伪·技术文章</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>在上大学之前，一直以来的梦想是拥有一台属于自己的电脑。这个梦想在步入大学生涯之后得以实现。然而不知不觉却失去了许多。比如，每当窗外大雨磅礴的时候，心也共鸣似的跟着天空哭泣。我曾经以为是我成熟了，终于摆脱了那种令人心情不快的忧郁，其实我是失去了对自己分析内心的能力，失去了用文字表达感情的习惯，失去了和TA交流心绪的机会。失去的已经永远的失去了，可我还能重新开始。我将以这一篇毫无技术含量的技术文章开始新的征程。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p><a href="https://hexo.io/zh-cn/docs/">官方文档</a></p>
+<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><p><a href="https://nodejs.org/en/">Node.js下载地址</a><br>LTS为长期更新版本，Current为最新版本，看个人喜好了。下载完双击安装即可<br>在<font color="red">Custom Setup</font>这一步记得选择<font color="red">Add to PATH</font>，可以自动配置环境变量。</p>
+<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><p><a href="https://git-scm.com/">Git下载地址</a><br>下载完双击安装即可  </p>
+<p><font color="red">建议选择最新版本</font>，本人就因为Git的版本难问题，在Deploy的时候纠结了老半天，最后在Github上搜索到了原因——因为Github更新了Git版本，更新了Git就解决了(还是听从了官方的建议，遇到问题请时候用在Google或者Github上搜索，百度搜索技术问题是真的不靠谱)</p>
+        </div>
+        <a href="/2018/03/09/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/" class="read-more">Read More</a>
+    
+
+</div>
+            
+        </section>
+    </div>
+</div>
+
+
+
+
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2023/06/21/three-js%E4%B8%AD%E6%AD%A3%E5%8F%8D%E9%9D%A2%E9%A2%9C%E8%89%B2%E4%B8%8D%E5%90%8C/">three.js中正反面颜色不同</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/06/21/%E8%B0%88%E5%BE%AE%E5%95%86/">谈微商</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/06/08/Flag/">Flag</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/05/22/%E4%BD%BF%E7%94%A8opencv.js%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">使用OpenCV.js进行图像处理</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/IFE/">IFE</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92/">项目计划</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/%E4%BC%AA%C2%B7%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">伪·技术文章</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://telegram.org/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-telegram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+
+<script src="/js/main.js"></script>
+
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
