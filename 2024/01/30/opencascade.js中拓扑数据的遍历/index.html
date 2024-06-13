@@ -1,415 +1,337 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
+<html lang="zh-CN">
 <head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-    <!--Description-->
-    
-        <meta name="description" content="基本概念在OCCT中，主要有两种数据，一种是Geometry几何数据，一种是Topology拓扑数据。
-Topology拓扑数据是抽象类型可以总结为以下几种:
-
-Vertex 点 0维
-Edge 边
-Wire 由顶点相连的边组成的序列
-Face plane2D平面 或者 surface 3D表(曲)">
-    
-
-    <!--Author-->
-    
-        <meta name="author" content="dieice2030">
-    
-
-    <!--Open Graph Title-->
-    
-        <meta property="og:title" content="opencascade.js中拓扑数据的遍历"/>
-    
-
-    <!--Open Graph Description-->
-    
-
-    <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="dieice2030"/>
-
-    <!--Type page-->
-    
-        <meta property="og:type" content="article" />
-    
-
-    <!--Page Cover-->
-    
-
-    
-        <meta name="twitter:card" content="summary" />
-    
-    
-    
-
-    <!-- Title -->
-    
-    <title>opencascade.js中拓扑数据的遍历 - dieice2030</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Gallery -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
-
-    <!-- Custom CSS -->
-    
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-    <!-- Google Analytics -->
-    
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基本概念 在OCCT中，主要有两种数据，一种是Geometry几何数据，一种是Topology拓扑数据。 Topology拓扑数据是抽象类型可以总结为以下几种: - Vertex 点 0维 - Edge 边 - Wire 由顶点相连的边组成的序列 - Face plane2D平面 或者 surface 3D表(曲)面 上由Wire所围成的一块区域 - Shell 由一组通过边连接的面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="opencascade.js中拓扑数据的遍历">
+<meta property="og:url" content="http://yoursite.com/2024/01/30/opencascade.js%E4%B8%AD%E6%8B%93%E6%89%91%E6%95%B0%E6%8D%AE%E7%9A%84%E9%81%8D%E5%8E%86/index.html">
+<meta property="og:site_name" content="dieice2030">
+<meta property="og:description" content="基本概念 在OCCT中，主要有两种数据，一种是Geometry几何数据，一种是Topology拓扑数据。 Topology拓扑数据是抽象类型可以总结为以下几种: - Vertex 点 0维 - Edge 边 - Wire 由顶点相连的边组成的序列 - Face plane2D平面 或者 surface 3D表(曲)面 上由Wire所围成的一块区域 - Shell 由一组通过边连接的面">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-30T08:29:53.000Z">
+<meta property="article:modified_time" content="2024-06-13T06:45:42.305Z">
+<meta property="article:author" content="dieice2030">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="opencascade.js">
+<meta property="article:tag" content="occt">
+<meta property="article:tag" content="3D">
+<meta name="twitter:card" content="summary">
 
 
-<meta name="generator" content="Hexo 7.1.1"></head>
+<link rel="canonical" href="http://yoursite.com/2024/01/30/opencascade.js%E4%B8%AD%E6%8B%93%E6%89%91%E6%95%B0%E6%8D%AE%E7%9A%84%E9%81%8D%E5%8E%86/">
 
 
-<body>
 
-<div class="bg-gradient"></div>
-<div class="bg-pattern"></div>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/2024/01/30/opencascade.js%E4%B8%AD%E6%8B%93%E6%89%91%E6%95%B0%E6%8D%AE%E7%9A%84%E9%81%8D%E5%8E%86/","path":"2024/01/30/opencascade.js中拓扑数据的遍历/","title":"opencascade.js中拓扑数据的遍历"}</script>
 
-<!-- Menu -->
-<!--Menu Links and Overlay-->
-<div class="menu-bg">
-    <div class="menu-container">
-        <ul>
-            
-            <li class="menu-item">
-                <a href="/">
-                    Home
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/archives">
-                    Archives
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/about.html">
-                    About
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/tags">
-                    Tags
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/categories">
-                    Categories
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/contact.html">
-                    Contact
-                </a>
-            </li>
-            
-        </ul>
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>opencascade.js中拓扑数据的遍历 | dieice2030</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
     </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dieice2030</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
 </div>
 
-<!--Hamburger Icon-->
-<nav>
-    <a href="#menu"></a>
-</nav>
 
-<div class="container">
 
-    <!-- Main Content -->
-    <div class="row">
-    <div class="col-sm-12">
 
-        <!--Title and Logo-->
-        <header>
-    <div class="logo">
-        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
-        
-    </div>
+
+
+
 </header>
+        
+  
+  <aside class="sidebar">
 
-        <section class="main">
-            
-<div class="post">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-    <div class="post-header">
-        <h1 class="title">
-            <a href="/2024/01/30/opencascade.js%E4%B8%AD%E6%8B%93%E6%89%91%E6%95%B0%E6%8D%AE%E7%9A%84%E9%81%8D%E5%8E%86/">
-                opencascade.js中拓扑数据的遍历
-            </a>
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">遍历方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.</span> <span class="nav-text">最佳实践</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">dieice2030</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/01/30/opencascade.js%E4%B8%AD%E6%8B%93%E6%89%91%E6%95%B0%E6%8D%AE%E7%9A%84%E9%81%8D%E5%8E%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="dieice2030">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dieice2030">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="opencascade.js中拓扑数据的遍历 | dieice2030">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          opencascade.js中拓扑数据的遍历
         </h1>
-        <div class="post-info">
-            
-                <span class="date">2024-01-30</span>
-            
-            
-            
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-01-30 16:29:53" itemprop="dateCreated datePublished" datetime="2024-01-30T16:29:53+08:00">2024-01-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-13 14:45:42" itemprop="dateModified" datetime="2024-06-13T14:45:42+08:00">2024-06-13</time>
+    </span>
+
+  
+</div>
+
         </div>
-    </div>
+      </header>
 
-    <div class="content">
-
-        <!-- Gallery -->
-        
-
-        <!-- Post Content -->
-        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>在OCCT中，主要有两种数据，一种是<code>Geometry</code>几何数据，一种是<code>Topology</code>拓扑数据。</p>
-<p><code>Topology</code>拓扑数据是抽象类型可以总结为以下几种:</p>
-<ul>
-<li><code>Vertex</code> 点 0维</li>
-<li><code>Edge</code> 边</li>
-<li><code>Wire</code> 由顶点相连的边组成的序列</li>
-<li><code>Face</code> <code>plane2D</code>平面 或者 <code>surface</code> 3D表(曲)面 上由<code>Wire</code>所围成的一块区域</li>
-<li><code>Shell</code> 由一组通过边连接的面组成的<code>Wire boundaries</code>线框</li>
-<li><code>Solid</code> 由<code>Shell</code>包围的3D空间的一部分</li>
-<li><code>Compound Solid</code> <code>Solid</code>的集合</li>
-</ul>
-<p><code>Wire</code> 和 <code>Solid</code> 可以闭合也可以<code>infinity</code>不闭合</p>
-<p>对应到OCCT中的类型有，即<code>TopAbs_ShapeEnum</code>的枚举值有:</p>
-<ul>
-<li><code>COMPOUND</code>: 一组任意类型的拓扑数据</li>
-<li><code>COMPSOLID</code>: <code>Compound Solid</code></li>
-<li><code>SOLID</code>: <code>Solid</code></li>
-<li><code>SHELL</code>: <code>Shell</code></li>
-<li><code>FACE</code>: <code>Face</code></li>
-<li><code>WIRE</code>: <code>Wire</code></li>
-<li><code>EDGE</code> <code>Edge</code></li>
-<li><code>VERTEX</code>: <code>Vertex</code></li>
-<li><code>SHPAE</code>: <code>TopoDS_Shape</code>是所有类型的基类</li>
-</ul>
-<h2 id="遍历方法"><a href="#遍历方法" class="headerlink" title="遍历方法"></a>遍历方法</h2><p>通常的遍历方法是通过<code>TopExp_Explorer</code><br>例如遍历一个面的所有边<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// oc 是已经加载的 OpenCascadeInstance 实例</span></span><br><span class="line"><span class="comment">// face 是 TopoDS_Face 类</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// explorer 是一个迭代器</span></span><br><span class="line"><span class="keyword">const</span> explorer = <span class="keyword">new</span> oc.<span class="title class_">TopExp</span>_Explorer_2(face, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_EDGE</span>, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_SHAPE</span>)</span><br><span class="line"><span class="keyword">while</span> (explorer.<span class="title class_">More</span>()) &#123;</span><br><span class="line">  <span class="comment">// 通过explorer.Current() 拿到当前只向的TopoDS_Shape</span></span><br><span class="line">  <span class="comment">// 由于OCCT基于C++编写，是强类型的，所以需要通过下面的方法声明为TopoDS_Edge类型</span></span><br><span class="line">  <span class="keyword">const</span> edge = oc.<span class="property">TopoDS</span>.<span class="title class_">Edge</span>_1(explorer.<span class="title class_">Current</span>())</span><br><span class="line">  <span class="comment">// 后续操作</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 后续操作</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>不过这样的遍历并不保证顺序，即遍历得到的边不保证是首尾相连的<br>如果需要按照顺序遍历<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// oc 是已经加载的 OpenCascadeInstance 实例</span></span><br><span class="line"><span class="comment">// face 是 TopoDS_Face 类</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// explorer 是一个迭代器</span></span><br><span class="line"><span class="comment">// 使用 BRepTools_WireExplorer 替代 TopExp_Explorer 遍历Face/Wire的Edge可以保证顺序</span></span><br><span class="line"><span class="keyword">const</span> explorer = <span class="keyword">new</span> <span class="title class_">OcctInstance</span>.<span class="property">oc</span>.<span class="title class_">BRepTools</span>_WireExplorer_3(outerWire, face)</span><br><span class="line"><span class="keyword">while</span> (explorer.<span class="title class_">More</span>()) &#123;</span><br><span class="line">  <span class="comment">// 通过explorer.Current() 拿到当前只向的TopoDS_Shape</span></span><br><span class="line">  <span class="comment">// 由于OCCT基于C++编写，是强类型的，所以需要通过下面的方法声明为TopoDS_Edge类型</span></span><br><span class="line">  <span class="keyword">const</span> edge = oc.<span class="property">TopoDS</span>.<span class="title class_">Edge</span>_1(explorer.<span class="title class_">Current</span>())</span><br><span class="line">  <span class="comment">// 后续操作</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 后续操作</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><p>在<code>opencascade.js</code>中，创建的<code>OCCT</code>对象不会被<code>JavaScript</code>的垃圾回收机制自动清理，需要手动调用<code>delete</code>方法删除内存占用。因此，应该尽可能少地创建对象<br>例如，需要遍历face1 和 face2 的边，可以这样<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在某处创建迭代器</span></span><br><span class="line"><span class="keyword">const</span> explorer = <span class="keyword">new</span> oc.<span class="title class_">TopExp</span>_Explorer_1()</span><br><span class="line"><span class="keyword">for</span> (explorer.<span class="title class_">Init</span>(face1, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_EDGE</span>, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_SHAPE</span>); explorer.<span class="title class_">More</span>(); explorer.<span class="title class_">Next</span>()) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (explorer.<span class="title class_">Init</span>(face2, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_EDGE</span>, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_SHAPE</span>); explorer.<span class="title class_">More</span>(); explorer.<span class="title class_">Next</span>()) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 销毁迭代器</span></span><br><span class="line">explorer.<span class="title function_">delete</span>()</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="基本概念">基本概念</h2>
+<p>在OCCT中，主要有两种数据，一种是<code>Geometry</code>几何数据，一种是<code>Topology</code>拓扑数据。</p>
+<p><code>Topology</code>拓扑数据是抽象类型可以总结为以下几种: -
+<code>Vertex</code> 点 0维 - <code>Edge</code> 边 - <code>Wire</code>
+由顶点相连的边组成的序列 - <code>Face</code> <code>plane2D</code>平面
+或者 <code>surface</code> 3D表(曲)面
+上由<code>Wire</code>所围成的一块区域 - <code>Shell</code>
+由一组通过边连接的面组成的<code>Wire boundaries</code>线框 -
+<code>Solid</code> 由<code>Shell</code>包围的3D空间的一部分 -
+<code>Compound Solid</code> <code>Solid</code>的集合</p>
+<p><code>Wire</code> 和 <code>Solid</code>
+可以闭合也可以<code>infinity</code>不闭合</p>
+<p>对应到OCCT中的类型有，即<code>TopAbs_ShapeEnum</code>的枚举值有: -
+<code>COMPOUND</code>: 一组任意类型的拓扑数据 - <code>COMPSOLID</code>:
+<code>Compound Solid</code> - <code>SOLID</code>: <code>Solid</code> -
+<code>SHELL</code>: <code>Shell</code> - <code>FACE</code>:
+<code>Face</code> - <code>WIRE</code>: <code>Wire</code> -
+<code>EDGE</code> <code>Edge</code> - <code>VERTEX</code>:
+<code>Vertex</code> - <code>SHPAE</code>:
+<code>TopoDS_Shape</code>是所有类型的基类</p>
+<h2 id="遍历方法">遍历方法</h2>
+<p>通常的遍历方法是通过<code>TopExp_Explorer</code><br />
+例如遍历一个面的所有边 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// oc 是已经加载的 OpenCascadeInstance 实例</span></span><br><span class="line"><span class="comment">// face 是 TopoDS_Face 类</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// explorer 是一个迭代器</span></span><br><span class="line"><span class="keyword">const</span> explorer = <span class="keyword">new</span> oc.<span class="title class_">TopExp</span>_Explorer_2(face, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_EDGE</span>, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_SHAPE</span>)</span><br><span class="line"><span class="keyword">while</span> (explorer.<span class="title class_">More</span>()) &#123;</span><br><span class="line">  <span class="comment">// 通过explorer.Current() 拿到当前只向的TopoDS_Shape</span></span><br><span class="line">  <span class="comment">// 由于OCCT基于C++编写，是强类型的，所以需要通过下面的方法声明为TopoDS_Edge类型</span></span><br><span class="line">  <span class="keyword">const</span> edge = oc.<span class="property">TopoDS</span>.<span class="title class_">Edge</span>_1(explorer.<span class="title class_">Current</span>())</span><br><span class="line">  <span class="comment">// 后续操作</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 后续操作</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+不过这样的遍历并不保证顺序，即遍历得到的边不保证是首尾相连的<br />
+如果需要按照顺序遍历 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// oc 是已经加载的 OpenCascadeInstance 实例</span></span><br><span class="line"><span class="comment">// face 是 TopoDS_Face 类</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// explorer 是一个迭代器</span></span><br><span class="line"><span class="comment">// 使用 BRepTools_WireExplorer 替代 TopExp_Explorer 遍历Face/Wire的Edge可以保证顺序</span></span><br><span class="line"><span class="keyword">const</span> explorer = <span class="keyword">new</span> <span class="title class_">OcctInstance</span>.<span class="property">oc</span>.<span class="title class_">BRepTools</span>_WireExplorer_3(outerWire, face)</span><br><span class="line"><span class="keyword">while</span> (explorer.<span class="title class_">More</span>()) &#123;</span><br><span class="line">  <span class="comment">// 通过explorer.Current() 拿到当前只向的TopoDS_Shape</span></span><br><span class="line">  <span class="comment">// 由于OCCT基于C++编写，是强类型的，所以需要通过下面的方法声明为TopoDS_Edge类型</span></span><br><span class="line">  <span class="keyword">const</span> edge = oc.<span class="property">TopoDS</span>.<span class="title class_">Edge</span>_1(explorer.<span class="title class_">Current</span>())</span><br><span class="line">  <span class="comment">// 后续操作</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 后续操作</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h2 id="最佳实践">最佳实践</h2>
+<p>在<code>opencascade.js</code>中，创建的<code>OCCT</code>对象不会被<code>JavaScript</code>的垃圾回收机制自动清理，需要手动调用<code>delete</code>方法删除内存占用。因此，应该尽可能少地创建对象
+例如，需要遍历face1 和 face2 的边，可以这样 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在某处创建迭代器</span></span><br><span class="line"><span class="keyword">const</span> explorer = <span class="keyword">new</span> oc.<span class="title class_">TopExp</span>_Explorer_1()</span><br><span class="line"><span class="keyword">for</span> (explorer.<span class="title class_">Init</span>(face1, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_EDGE</span>, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_SHAPE</span>); explorer.<span class="title class_">More</span>(); explorer.<span class="title class_">Next</span>()) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (explorer.<span class="title class_">Init</span>(face2, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_EDGE</span>, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_SHAPE</span>); explorer.<span class="title class_">More</span>(); explorer.<span class="title class_">Next</span>()) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 销毁迭代器</span></span><br><span class="line">explorer.<span class="title function_">delete</span>()</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
 
     </div>
 
     
-
+    
     
 
-    <!-- Comments -->
-    
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+              <a href="/tags/opencascade-js/" rel="tag"># opencascade.js</a>
+              <a href="/tags/occt/" rel="tag"># occt</a>
+              <a href="/tags/3D/" rel="tag"># 3D</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/01/27/%E6%96%B0%E7%9A%84FLAG/" rel="prev" title="新的FLAG">
+                  <i class="fa fa-angle-left"></i> 新的FLAG
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/06/13/opencascade.js%E4%B8%AD%E7%9A%84%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2/" rel="next" title="opencascade.js中的仿射变换">
+                  opencascade.js中的仿射变换 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
 
 </div>
-        </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">dieice2030</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
 
     </div>
-</div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
-</div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<!-- Footer -->
-<div class="push"></div>
-
-<footer class="footer-content">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
-                <h2>About</h2>
-                <p>
-                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
-                </p>
-            </div>
-            
-    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
-        <h2>Recent Posts</h2>
-        <ul>
-            
-            <li>
-                <a class="footer-post" href="/2024/06/13/opencascade.js%E4%B8%AD%E7%9A%84%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2/">opencascade.js中的仿射变换</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2024/01/30/opencascade.js%E4%B8%AD%E6%8B%93%E6%89%91%E6%95%B0%E6%8D%AE%E7%9A%84%E9%81%8D%E5%8E%86/">opencascade.js中拓扑数据的遍历</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2024/01/27/%E6%96%B0%E7%9A%84FLAG/">新的FLAG</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2023/06/21/three-js%E4%B8%AD%E6%AD%A3%E5%8F%8D%E9%9D%A2%E9%A2%9C%E8%89%B2%E4%B8%8D%E5%90%8C/">three.js中正反面颜色不同</a>
-            </li>
-            
-        </ul>
-    </div>
+  
 
 
 
-            
-<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
-    <h2>Categories</h2>
-    <ul>
-        
-        <li>
-            <a class="footer-post" href="/categories/%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92/">项目计划</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/IFE/">IFE</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/%E4%BC%AA%C2%B7%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">伪·技术文章</a>
-        </li>
-        
-    </ul>
-</div>
-
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <ul class="list-inline footer-social-icons">
-                    
-                    <li class="list-inline-item">
-                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-github"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://twitter.com/?lang=en">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-twitter"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://www.facebook.com/">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-facebook"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://www.instagram.com/">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-instagram"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://dribbble.com/">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-dribbble"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://telegram.org/">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-telegram"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://www.behance.net/">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-behance"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://500px.com/">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-500px"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="mailto:test@example.com">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-envelope-o"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="\#">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-rss"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="footer-copyright">
-                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- After footer scripts -->
-
-<!-- jQuery -->
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-
-<!-- Tween Max -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
-
-<!-- Gallery -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-
-<!-- Custom JavaScript -->
-
-<script src="/js/main.js"></script>
 
 
-<!-- Disqus Comments -->
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
 </body>
-
 </html>

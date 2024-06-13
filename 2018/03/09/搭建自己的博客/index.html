@@ -1,220 +1,285 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
+<html lang="zh-CN">
 <head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-    <!--Description-->
-    
-        <meta name="description" content="在上大学之前，一直以来的梦想是拥有一台属于自己的电脑。这个梦想在步入大学生涯之后得以实现。然而不知不觉却失去了许多。比如，每当窗外大雨磅礴的时候，心也共鸣似的跟着天空哭泣。我曾经以为是我成熟了，终于摆脱了那种令人心情不快的忧郁，其实我是失去了对自己分析内心的能力，失去了用文字表达感情的习惯，失去了和TA交流心绪的机会。失去的已经永远的失去了，可我还能重新开始。我将以这一篇毫无技术含量的技术文章开始新的征程。
-准备工作官方文档
-Node.jsNode.js下载地址LTS为长期更新版本，Current为最新版本，看个人喜好了。下载完双击安装即可在Custom Setup这一步记得选择Add to PATH，可以自动配置环境变量。
-GitGit下载地址下载完双击安装即可  
-建议选择最新版本，本人就因为Git的版本难问题，在Deploy的时候纠结了老半天，最后在Github上搜索到了原因——因为Github更新了Git版本，更新了Git就解决了(还是听从了官方的建议，遇到问题请时候用在Google或者Github上搜索，百度搜索技术问题是真的不靠谱)">
-    
-
-    <!--Author-->
-    
-        <meta name="author" content="dieice2030">
-    
-
-    <!--Open Graph Title-->
-    
-        <meta property="og:title" content="搭建自己的博客"/>
-    
-
-    <!--Open Graph Description-->
-    
-
-    <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="dieice2030"/>
-
-    <!--Type page-->
-    
-        <meta property="og:type" content="article" />
-    
-
-    <!--Page Cover-->
-    
-
-    
-        <meta name="twitter:card" content="summary" />
-    
-    
-    
-
-    <!-- Title -->
-    
-    <title>搭建自己的博客 - dieice2030</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Gallery -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
-
-    <!-- Custom CSS -->
-    
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-    <!-- Google Analytics -->
-    
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在上大学之前，一直以来的梦想是拥有一台属于自己的电脑。这个梦想在步入大学生涯之后得以实现。然而不知不觉却失去了许多。比如，每当窗外大雨磅礴的时候，心也共鸣似的跟着天空哭泣。我曾经以为是我成熟了，终于摆脱了那种令人心情不快的忧郁，其实我是失去了对自己分析内心的能力，失去了用文字表达感情的习惯，失去了和TA交流心绪的机会。失去的已经永远的失去了，可我还能重新开始。我将以这一篇毫无技术含量的技术文章开始">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建自己的博客">
+<meta property="og:url" content="http://yoursite.com/2018/03/09/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="dieice2030">
+<meta property="og:description" content="在上大学之前，一直以来的梦想是拥有一台属于自己的电脑。这个梦想在步入大学生涯之后得以实现。然而不知不觉却失去了许多。比如，每当窗外大雨磅礴的时候，心也共鸣似的跟着天空哭泣。我曾经以为是我成熟了，终于摆脱了那种令人心情不快的忧郁，其实我是失去了对自己分析内心的能力，失去了用文字表达感情的习惯，失去了和TA交流心绪的机会。失去的已经永远的失去了，可我还能重新开始。我将以这一篇毫无技术含量的技术文章开始">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-03-09T11:58:48.000Z">
+<meta property="article:modified_time" content="2023-06-21T02:29:39.509Z">
+<meta property="article:author" content="dieice2030">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="github">
+<meta property="article:tag" content="搭建博客">
+<meta property="article:tag" content="个人主页">
+<meta name="twitter:card" content="summary">
 
 
-<meta name="generator" content="Hexo 7.1.1"></head>
+<link rel="canonical" href="http://yoursite.com/2018/03/09/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
 
 
-<body>
 
-<div class="bg-gradient"></div>
-<div class="bg-pattern"></div>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/2018/03/09/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/","path":"2018/03/09/搭建自己的博客/","title":"搭建自己的博客"}</script>
 
-<!-- Menu -->
-<!--Menu Links and Overlay-->
-<div class="menu-bg">
-    <div class="menu-container">
-        <ul>
-            
-            <li class="menu-item">
-                <a href="/">
-                    Home
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/archives">
-                    Archives
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/about.html">
-                    About
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/tags">
-                    Tags
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/categories">
-                    Categories
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/contact.html">
-                    Contact
-                </a>
-            </li>
-            
-        </ul>
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>搭建自己的博客 | dieice2030</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
     </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dieice2030</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
 </div>
 
-<!--Hamburger Icon-->
-<nav>
-    <a href="#menu"></a>
-</nav>
 
-<div class="container">
 
-    <!-- Main Content -->
-    <div class="row">
-    <div class="col-sm-12">
 
-        <!--Title and Logo-->
-        <header>
-    <div class="logo">
-        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
-        
-    </div>
+
+
+
 </header>
+        
+  
+  <aside class="sidebar">
 
-        <section class="main">
-            
-<div class="post">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-    <div class="post-header">
-        <h1 class="title">
-            <a href="/2018/03/09/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
-                搭建自己的博客
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-03-09</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/伪·技术文章/">伪·技术文章</a>
-                </span>
-            
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#node.js"><span class="nav-number">1.1.</span> <span class="nav-text">Node.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git"><span class="nav-number">1.2.</span> <span class="nav-text">Git</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85hexo"><span class="nav-number">2.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96hexo"><span class="nav-number">3.</span> <span class="nav-text">初始化Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#config.yml"><span class="nav-number">3.1.</span> <span class="nav-text">_config.yml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#package.json"><span class="nav-number">3.2.</span> <span class="nav-text">package.json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scaffolds%E6%A8%A1%E6%9D%BF"><span class="nav-number">3.3.</span> <span class="nav-text">scaffolds（模板）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source%E8%B5%84%E6%BA%90"><span class="nav-number">3.4.</span> <span class="nav-text">source（资源）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#themes%E4%B8%BB%E9%A2%98"><span class="nav-number">3.5.</span> <span class="nav-text">themes（主题）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%AD%E6%A1%A5%E5%88%B0github"><span class="nav-number">4.</span> <span class="nav-text">搭桥到Github</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%8F%91%E5%B8%83"><span class="nav-number">5.</span> <span class="nav-text">本地发布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E5%88%B0github"><span class="nav-number">6.</span> <span class="nav-text">上传到Github</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8F%91%E5%B8%83%E4%BF%A1%E6%81%AF"><span class="nav-number">6.1.</span> <span class="nav-text">配置发布信息</span></a></li></ol></li></ol></div>
         </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">dieice2030</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
     </div>
 
-    <div class="content">
+    
+  </aside>
 
-        <!-- Gallery -->
-        
 
-        <!-- Post Content -->
-        <p>在上大学之前，一直以来的梦想是拥有一台属于自己的电脑。这个梦想在步入大学生涯之后得以实现。然而不知不觉却失去了许多。比如，每当窗外大雨磅礴的时候，心也共鸣似的跟着天空哭泣。我曾经以为是我成熟了，终于摆脱了那种令人心情不快的忧郁，其实我是失去了对自己分析内心的能力，失去了用文字表达感情的习惯，失去了和TA交流心绪的机会。失去的已经永远的失去了，可我还能重新开始。我将以这一篇毫无技术含量的技术文章开始新的征程。</p>
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p><a href="https://hexo.io/zh-cn/docs/">官方文档</a></p>
-<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><p><a href="https://nodejs.org/en/">Node.js下载地址</a><br>LTS为长期更新版本，Current为最新版本，看个人喜好了。下载完双击安装即可<br>在<font color="red">Custom Setup</font>这一步记得选择<font color="red">Add to PATH</font>，可以自动配置环境变量。</p>
-<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><p><a href="https://git-scm.com/">Git下载地址</a><br>下载完双击安装即可  </p>
-<p><font color="red">建议选择最新版本</font>，本人就因为Git的版本难问题，在Deploy的时候纠结了老半天，最后在Github上搜索到了原因——因为Github更新了Git版本，更新了Git就解决了(还是听从了官方的建议，遇到问题请时候用在Google或者Github上搜索，百度搜索技术问题是真的不靠谱)</p>
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/09/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="dieice2030">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dieice2030">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="搭建自己的博客 | dieice2030">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          搭建自己的博客
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-03-09 19:58:48" itemprop="dateCreated datePublished" datetime="2018-03-09T19:58:48+08:00">2018-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-06-21 10:29:39" itemprop="dateModified" datetime="2023-06-21T10:29:39+08:00">2023-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BC%AA%C2%B7%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">伪·技术文章</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>在上大学之前，一直以来的梦想是拥有一台属于自己的电脑。这个梦想在步入大学生涯之后得以实现。然而不知不觉却失去了许多。比如，每当窗外大雨磅礴的时候，心也共鸣似的跟着天空哭泣。我曾经以为是我成熟了，终于摆脱了那种令人心情不快的忧郁，其实我是失去了对自己分析内心的能力，失去了用文字表达感情的习惯，失去了和TA交流心绪的机会。失去的已经永远的失去了，可我还能重新开始。我将以这一篇毫无技术含量的技术文章开始新的征程。</p>
+<h1 id="准备工作">准备工作</h1>
+<p><a href="https://hexo.io/zh-cn/docs/">官方文档</a></p>
+<h2 id="node.js">Node.js</h2>
+<p><a href="https://nodejs.org/en/">Node.js下载地址</a><br />
+LTS为长期更新版本，Current为最新版本，看个人喜好了。下载完双击安装即可<br />
+在<font color="red">Custom
+Setup</font>这一步记得选择<font color="red">Add to
+PATH</font>，可以自动配置环境变量。</p>
+<h2 id="git">Git</h2>
+<p><a href="https://git-scm.com/">Git下载地址</a><br />
+下载完双击安装即可<br />
+<font color="red">建议选择最新版本</font>，本人就因为Git的版本难问题，在Deploy的时候纠结了老半天，最后在Github上搜索到了原因——因为Github更新了Git版本，更新了Git就解决了(还是听从了官方的建议，遇到问题请时候用在Google或者Github上搜索，百度搜索技术问题是真的不靠谱)</p>
 <span id="more"></span>
-<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1><p>确保你已经完成了准备工作<br>以下是安装命令</p>
+<h1 id="安装hexo">安装Hexo</h1>
+<p>确保你已经完成了准备工作<br />
+以下是安装命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 <p>或者</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i -g hexo</span><br></pre></td></tr></table></figure>
-<p><code>i</code> 是 <code>install</code> npm命令的简写，<code>hexo</code>和<code>hexo-cli</code>的区别不是很清楚，就网上结果看来是都可以的</p>
-<h1 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h1><p>可以在指定目录中新建一个用来存放个人博客数据的文件夹，在该文件夹中右键点击<code>Git Bush Here</code>  然后使用命令</p>
+<p><code>i</code> 是 <code>install</code>
+npm命令的简写，<code>hexo</code>和<code>hexo-cli</code>的区别不是很清楚，就网上结果看来是都可以的</p>
+<h1 id="初始化hexo">初始化Hexo</h1>
+<p>可以在指定目录中新建一个用来存放个人博客数据的文件夹，在该文件夹中右键点击<code>Git Bush Here</code>
+然后使用命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
 <p>或者使用命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
 <p>在指定文件夹中初始化</p>
 <p>新建完成后，指定文件夹的初始目录如下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
-<h2 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h2><p>网站的配置信息，详细内容参考官方文档中的<a href="https://hexo.io/zh-cn/docs/configuration.html">配置</a>部分</p>
-<h2 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h2><p>应用程序的信息。其中<a href="http://embeddedjs.com/">EJS</a>, <a href="http://stylus-lang.com/">Stylus</a> 和 <a href="https://daringfireball.net/projects/markdown/">Markdown</a> renderer 为默认安装。可以根据需要增加或者删除</p>
+<h2 id="config.yml">_config.yml</h2>
+<p>网站的配置信息，详细内容参考官方文档中的<a
+href="https://hexo.io/zh-cn/docs/configuration.html">配置</a>部分</p>
+<h2 id="package.json">package.json</h2>
+<p>应用程序的信息。其中<a href="http://embeddedjs.com/">EJS</a>, <a
+href="http://stylus-lang.com/">Stylus</a> 和 <a
+href="https://daringfireball.net/projects/markdown/">Markdown</a>
+renderer 为默认安装。可以根据需要增加或者删除</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;hexo-site&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;private&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;hexo&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;3.6.0&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;hexo&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^3.2.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hexo-generator-archive&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^0.1.4&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hexo-generator-category&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^0.1.3&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hexo-generator-index&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^0.2.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hexo-generator-tag&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^0.2.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hexo-renderer-ejs&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^0.3.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hexo-renderer-marked&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^0.3.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hexo-renderer-stylus&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^0.3.1&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hexo-server&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^0.2.2&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="scaffolds（模板）"><a href="#scaffolds（模板）" class="headerlink" title="scaffolds（模板）"></a>scaffolds（模板）</h2><p>当您新建文章时，Hexo 会根据 scaffold 来建立文件。</p>
+<h2 id="scaffolds模板">scaffolds（模板）</h2>
+<p>当您新建文章时，Hexo 会根据 scaffold 来建立文件。</p>
 <p>Hexo的模板是指在新建的markdown文件中默认填充的内容。例如，如果您修改scaffold/post.md中的Front-matter内容，那么每次新建一篇文章时都会包含这个修改。</p>
-<h2 id="source（资源）"><a href="#source（资源）" class="headerlink" title="source（资源）"></a>source（资源）</h2><p>存放用户资源的地方。除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
-<h2 id="themes（主题）"><a href="#themes（主题）" class="headerlink" title="themes（主题）"></a>themes（主题）</h2><p>Hexo 会根据主题来生成静态页面。</p>
-<h1 id="搭桥到Github"><a href="#搭桥到Github" class="headerlink" title="搭桥到Github"></a>搭桥到Github</h1><ul>
+<h2 id="source资源">source（资源）</h2>
+<p>存放用户资源的地方。除 <em>posts 文件夹之外，开头命名为 </em>
+(下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML
+文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
+<h2 id="themes主题">themes（主题）</h2>
+<p>Hexo 会根据主题来生成静态页面。</p>
+<h1 id="搭桥到github">搭桥到Github</h1>
+<ul>
 <li>新建一个Github账号</li>
 <li>创建一个repository（仓库），形如<code>XXX.github.io</code>,其中<code>XXX</code>为你的github名称</li>
 <li>配置Git环境</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;XXX&quot;</span> <span class="comment">#设置全局用户名</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;XXX@example.mail&quot;</span> <span class="comment">#设置全局邮箱</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>创建SSH<br>windows的命令行没有自带ssh工具，直接用GitBash比较方便。使用命令</li>
+<li>创建SSH<br />
+windows的命令行没有自带ssh工具，直接用GitBash比较方便。使用命令</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;youremail@example.com&quot;</span></span><br></pre></td></tr></table></figure>
 <p>根据生成信息，在对应文件夹中找到<code>id_rsa.pub</code>，在github中依次点击<code>头像-&gt;settings-&gt;SSH and GPG keys-&gt;New SSH key</code>，将文件的内容复制到github中。</p>
-<h1 id="本地发布"><a href="#本地发布" class="headerlink" title="本地发布"></a>本地发布</h1><p>使用命令</p>
+<h1 id="本地发布">本地发布</h1>
+<p>使用命令</p>
 <blockquote>
 <p>$ npm i hexo-server</p>
 </blockquote>
@@ -222,11 +287,14 @@ GitGit下载地址下载完双击安装即可
 <p>使用命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean <span class="comment">#清除相关文件</span></span><br><span class="line">$ hexo generate <span class="comment">#生成相关文件</span></span><br><span class="line">$ hexo server <span class="comment">#本地发布</span></span><br></pre></td></tr></table></figure>
 <p>进行本地发布，然后就可以在浏览器中输入<code>http://localhost:4000</code>看到本地版个人博客了</p>
-<h1 id="上传到Github"><a href="#上传到Github" class="headerlink" title="上传到Github"></a>上传到Github</h1><h2 id="配置发布信息"><a href="#配置发布信息" class="headerlink" title="配置发布信息"></a>配置发布信息</h2><p>在创建的博客文件夹中，打开 <code>_config.yml</code>，按照以下形式配置</p>
+<h1 id="上传到github">上传到Github</h1>
+<h2 id="配置发布信息">配置发布信息</h2>
+<p>在创建的博客文件夹中，打开
+<code>_config.yml</code>，按照以下形式配置</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/XXX/XXX.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
 <p>使用命令</p>
 <blockquote>
-<p>npm install hexo-deployer-git –save</p>
+<p>npm install hexo-deployer-git --save</p>
 </blockquote>
 <p>安装deployer-git模块</p>
 <p>使用命令</p>
@@ -236,215 +304,96 @@ GitGit下载地址下载完双击安装即可
     </div>
 
     
-
     
-        <div class="post-tags">
-            <i class="fa fa-tags" aria-hidden="true"></i>
-            <a href="/tags/hexo/">#hexo</a> <a href="/tags/github/">#github</a> <a href="/tags/搭建博客/">#搭建博客</a> <a href="/tags/个人主页/">#个人主页</a>
-        </div>
     
 
-    <!-- Comments -->
-    
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/github/" rel="tag"># github</a>
+              <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag"># 搭建博客</a>
+              <a href="/tags/%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5/" rel="tag"># 个人主页</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/03/22/HS-Project%EF%BC%88%E4%B8%80%EF%BC%89/" rel="next" title="HS Project（一）">
+                  HS Project（一） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
 
 </div>
-        </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">dieice2030</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
 
     </div>
-</div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
-</div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<!-- Footer -->
-<div class="push"></div>
-
-<footer class="footer-content">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
-                <h2>About</h2>
-                <p>
-                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
-                </p>
-            </div>
-            
-    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
-        <h2>Recent Posts</h2>
-        <ul>
-            
-            <li>
-                <a class="footer-post" href="/2024/06/13/opencascade.js%E4%B8%AD%E7%9A%84%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2/">opencascade.js中的仿射变换</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2024/01/30/opencascade.js%E4%B8%AD%E6%8B%93%E6%89%91%E6%95%B0%E6%8D%AE%E7%9A%84%E9%81%8D%E5%8E%86/">opencascade.js中拓扑数据的遍历</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2024/01/27/%E6%96%B0%E7%9A%84FLAG/">新的FLAG</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2023/06/21/three-js%E4%B8%AD%E6%AD%A3%E5%8F%8D%E9%9D%A2%E9%A2%9C%E8%89%B2%E4%B8%8D%E5%90%8C/">three.js中正反面颜色不同</a>
-            </li>
-            
-        </ul>
-    </div>
+  
 
 
 
-            
-<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
-    <h2>Categories</h2>
-    <ul>
-        
-        <li>
-            <a class="footer-post" href="/categories/%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92/">项目计划</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/IFE/">IFE</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/%E4%BC%AA%C2%B7%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">伪·技术文章</a>
-        </li>
-        
-    </ul>
-</div>
-
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <ul class="list-inline footer-social-icons">
-                    
-                    <li class="list-inline-item">
-                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-github"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://twitter.com/?lang=en">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-twitter"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://www.facebook.com/">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-facebook"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://www.instagram.com/">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-instagram"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://dribbble.com/">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-dribbble"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://telegram.org/">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-telegram"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://www.behance.net/">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-behance"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="https://500px.com/">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-500px"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="mailto:test@example.com">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-envelope-o"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="\#">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-rss"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="footer-copyright">
-                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- After footer scripts -->
-
-<!-- jQuery -->
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-
-<!-- Tween Max -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
-
-<!-- Gallery -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-
-<!-- Custom JavaScript -->
-
-<script src="/js/main.js"></script>
 
 
-<!-- Disqus Comments -->
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
 </body>
-
 </html>
