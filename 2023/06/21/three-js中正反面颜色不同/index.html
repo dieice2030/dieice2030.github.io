@@ -175,7 +175,7 @@
 <h2 id="二、-使用材质数组"><a href="#二、-使用材质数组" class="headerlink" title="二、 使用材质数组"></a>二、 使用材质数组</h2><h3 id="1-创建材质数组，例如"><a href="#1-创建材质数组，例如" class="headerlink" title="1.  创建材质数组，例如"></a>1.  创建材质数组，例如</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> material1 = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">MeshBasicMaterial</span>(&#123;<span class="attr">color</span>: <span class="number">0xff0000</span>&#125;);</span><br><span class="line"><span class="keyword">const</span> material2 = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">MeshBasicMaterial</span>(&#123;<span class="attr">color</span>: <span class="number">0x00ff00</span>&#125;);</span><br><span class="line"><span class="keyword">const</span> materials = [material1, material2]</span><br></pre></td></tr></table></figure>
 <h3 id="2-如果有顶点索引，则遍历顶点索引，再添加反面的顶点索引；如果没有顶点索引，则遍历顶点，创建正面和反面的顶点索引。使用setIndex函数"><a href="#2-如果有顶点索引，则遍历顶点索引，再添加反面的顶点索引；如果没有顶点索引，则遍历顶点，创建正面和反面的顶点索引。使用setIndex函数" class="headerlink" title="2. 如果有顶点索引，则遍历顶点索引，再添加反面的顶点索引；如果没有顶点索引，则遍历顶点，创建正面和反面的顶点索引。使用setIndex函数"></a>2. 如果有顶点索引，则遍历顶点索引，再添加反面的顶点索引；如果没有顶点索引，则遍历顶点，创建正面和反面的顶点索引。使用setIndex函数</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> finalVertices = &lt;THREE.Vector3[]&gt;[...] // 几何体的顶点</span><br><span class="line">const geo = new THREE.BufferGeometry()</span><br><span class="line">geo.setFromPoints(finalVertices)</span><br><span class="line">// ! 计算法向量要在只有一个面的时候计算</span><br><span class="line">geo.computeVertexNormals() </span><br><span class="line">const newIndexes = &lt;number[]&gt;[]</span><br><span class="line">const count = finalVertices.length</span><br><span class="line">for(let i = 0; i &lt; count; i += 3) &#123;</span><br><span class="line">    newIndexes.push(i, i + 1, i + 2)</span><br><span class="line">&#125;</span><br><span class="line">for(let i = 0; i &lt; count; i += 3) &#123;</span><br><span class="line">    newIndexes.push(i, i + 2, i + 1)</span><br><span class="line">&#125;</span><br><span class="line">geo.setIndex(newIndexes)</span><br></pre></td></tr></table></figure>
 <h3 id="3-使用setGroup函数，将当前几何体分割成组进行渲染"><a href="#3-使用setGroup函数，将当前几何体分割成组进行渲染" class="headerlink" title="3. 使用setGroup函数，将当前几何体分割成组进行渲染"></a>3. 使用setGroup函数，将当前几何体分割成组进行渲染</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">geo.<span class="title function_">addGroup</span>(<span class="number">0</span>, count, <span class="number">0</span>)</span><br><span class="line">geo.<span class="title function_">addGroup</span>(count, count, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="https://bucket-ynote-online-cdn.note.youdao.com/dieice2030%40163.com%2F43BE56EE24AC47ADA8E5CA190EB5AD6A?download=doubleside%20mat.gif&amp;Signature=Gi8nGuSobLMFPpDwnFzW%2Bog55QltfsV%2BbA%2BtY%2BpvcJE%3D&amp;Expires=1687324066&amp;NOSAccessKeyId=e7d1acab859342789faa85a4b0cb4c83" alt="demo"></p>
+<p><img src="https://raw.githubusercontent.com/dieice2030/imagesRepo/master/doubleside%20mat2.gif" alt="demo"></p>
 
     </div>
 
@@ -213,19 +213,19 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2024/06/13/opencascade.js%E4%B8%AD%E7%9A%84%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2/">opencascade.js中的仿射变换</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2024/01/30/opencascade.js%E4%B8%AD%E6%8B%93%E6%89%91%E6%95%B0%E6%8D%AE%E7%9A%84%E9%81%8D%E5%8E%86/">opencascade.js中拓扑数据的遍历</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2024/01/27/%E6%96%B0%E7%9A%84FLAG/">新的FLAG</a>
             </li>
             
             <li>
                 <a class="footer-post" href="/2023/06/21/three-js%E4%B8%AD%E6%AD%A3%E5%8F%8D%E9%9D%A2%E9%A2%9C%E8%89%B2%E4%B8%8D%E5%90%8C/">three.js中正反面颜色不同</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/06/21/%E8%B0%88%E5%BE%AE%E5%95%86/">谈微商</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/06/08/Flag/">Flag</a>
             </li>
             
         </ul>
@@ -239,11 +239,11 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/IFE/">IFE</a>
+            <a class="footer-post" href="/categories/%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92/">项目计划</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92/">项目计划</a>
+            <a class="footer-post" href="/categories/IFE/">IFE</a>
         </li>
         
         <li>

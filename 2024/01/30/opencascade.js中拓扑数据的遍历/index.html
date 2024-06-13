@@ -10,6 +10,14 @@
 
     <!--Description-->
     
+        <meta name="description" content="基本概念在OCCT中，主要有两种数据，一种是Geometry几何数据，一种是Topology拓扑数据。
+Topology拓扑数据是抽象类型可以总结为以下几种:
+
+Vertex 点 0维
+Edge 边
+Wire 由顶点相连的边组成的序列
+Face plane2D平面 或者 surface 3D表(曲)">
+    
 
     <!--Author-->
     
@@ -18,7 +26,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="dieice2030"/>
+        <meta property="og:title" content="opencascade.js中拓扑数据的遍历"/>
     
 
     <!--Open Graph Description-->
@@ -29,7 +37,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -43,7 +51,7 @@
 
     <!-- Title -->
     
-    <title>html - dieice2030</title>
+    <title>opencascade.js中拓扑数据的遍历 - dieice2030</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -132,9 +140,7 @@
 <div class="container">
 
     <!-- Main Content -->
-    
-
-<div class="row">
+    <div class="row">
     <div class="col-sm-12">
 
         <!--Title and Logo-->
@@ -142,25 +148,76 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">#html</h1>
-        
     </div>
 </header>
 
-        <section class="main archive-container">
+        <section class="main">
             
-                <div class="archive-post">
-    <a href="/2018/03/22/HS-Project%EF%BC%88%E4%B8%80%EF%BC%89/">
-        <span class="archive-date">
-            Mar 2018
-        </span>
-        HS Project（一）
-    </a>
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2024/01/30/opencascade.js%E4%B8%AD%E6%8B%93%E6%89%91%E6%95%B0%E6%8D%AE%E7%9A%84%E9%81%8D%E5%8E%86/">
+                opencascade.js中拓扑数据的遍历
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2024-01-30</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>在OCCT中，主要有两种数据，一种是<code>Geometry</code>几何数据，一种是<code>Topology</code>拓扑数据。</p>
+<p><code>Topology</code>拓扑数据是抽象类型可以总结为以下几种:</p>
+<ul>
+<li><code>Vertex</code> 点 0维</li>
+<li><code>Edge</code> 边</li>
+<li><code>Wire</code> 由顶点相连的边组成的序列</li>
+<li><code>Face</code> <code>plane2D</code>平面 或者 <code>surface</code> 3D表(曲)面 上由<code>Wire</code>所围成的一块区域</li>
+<li><code>Shell</code> 由一组通过边连接的面组成的<code>Wire boundaries</code>线框</li>
+<li><code>Solid</code> 由<code>Shell</code>包围的3D空间的一部分</li>
+<li><code>Compound Solid</code> <code>Solid</code>的集合</li>
+</ul>
+<p><code>Wire</code> 和 <code>Solid</code> 可以闭合也可以<code>infinity</code>不闭合</p>
+<p>对应到OCCT中的类型有，即<code>TopAbs_ShapeEnum</code>的枚举值有:</p>
+<ul>
+<li><code>COMPOUND</code>: 一组任意类型的拓扑数据</li>
+<li><code>COMPSOLID</code>: <code>Compound Solid</code></li>
+<li><code>SOLID</code>: <code>Solid</code></li>
+<li><code>SHELL</code>: <code>Shell</code></li>
+<li><code>FACE</code>: <code>Face</code></li>
+<li><code>WIRE</code>: <code>Wire</code></li>
+<li><code>EDGE</code> <code>Edge</code></li>
+<li><code>VERTEX</code>: <code>Vertex</code></li>
+<li><code>SHPAE</code>: <code>TopoDS_Shape</code>是所有类型的基类</li>
+</ul>
+<h2 id="遍历方法"><a href="#遍历方法" class="headerlink" title="遍历方法"></a>遍历方法</h2><p>通常的遍历方法是通过<code>TopExp_Explorer</code><br>例如遍历一个面的所有边<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// oc 是已经加载的 OpenCascadeInstance 实例</span></span><br><span class="line"><span class="comment">// face 是 TopoDS_Face 类</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// explorer 是一个迭代器</span></span><br><span class="line"><span class="keyword">const</span> explorer = <span class="keyword">new</span> oc.<span class="title class_">TopExp</span>_Explorer_2(face, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_EDGE</span>, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_SHAPE</span>)</span><br><span class="line"><span class="keyword">while</span> (explorer.<span class="title class_">More</span>()) &#123;</span><br><span class="line">  <span class="comment">// 通过explorer.Current() 拿到当前只向的TopoDS_Shape</span></span><br><span class="line">  <span class="comment">// 由于OCCT基于C++编写，是强类型的，所以需要通过下面的方法声明为TopoDS_Edge类型</span></span><br><span class="line">  <span class="keyword">const</span> edge = oc.<span class="property">TopoDS</span>.<span class="title class_">Edge</span>_1(explorer.<span class="title class_">Current</span>())</span><br><span class="line">  <span class="comment">// 后续操作</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 后续操作</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>不过这样的遍历并不保证顺序，即遍历得到的边不保证是首尾相连的<br>如果需要按照顺序遍历<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// oc 是已经加载的 OpenCascadeInstance 实例</span></span><br><span class="line"><span class="comment">// face 是 TopoDS_Face 类</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// explorer 是一个迭代器</span></span><br><span class="line"><span class="comment">// 使用 BRepTools_WireExplorer 替代 TopExp_Explorer 遍历Face/Wire的Edge可以保证顺序</span></span><br><span class="line"><span class="keyword">const</span> explorer = <span class="keyword">new</span> <span class="title class_">OcctInstance</span>.<span class="property">oc</span>.<span class="title class_">BRepTools</span>_WireExplorer_3(outerWire, face)</span><br><span class="line"><span class="keyword">while</span> (explorer.<span class="title class_">More</span>()) &#123;</span><br><span class="line">  <span class="comment">// 通过explorer.Current() 拿到当前只向的TopoDS_Shape</span></span><br><span class="line">  <span class="comment">// 由于OCCT基于C++编写，是强类型的，所以需要通过下面的方法声明为TopoDS_Edge类型</span></span><br><span class="line">  <span class="keyword">const</span> edge = oc.<span class="property">TopoDS</span>.<span class="title class_">Edge</span>_1(explorer.<span class="title class_">Current</span>())</span><br><span class="line">  <span class="comment">// 后续操作</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 后续操作</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><p>在<code>opencascade.js</code>中，创建的<code>OCCT</code>对象不会被<code>JavaScript</code>的垃圾回收机制自动清理，需要手动调用<code>delete</code>方法删除内存占用。因此，应该尽可能少地创建对象<br>例如，需要遍历face1 和 face2 的边，可以这样<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在某处创建迭代器</span></span><br><span class="line"><span class="keyword">const</span> explorer = <span class="keyword">new</span> oc.<span class="title class_">TopExp</span>_Explorer_1()</span><br><span class="line"><span class="keyword">for</span> (explorer.<span class="title class_">Init</span>(face1, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_EDGE</span>, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_SHAPE</span>); explorer.<span class="title class_">More</span>(); explorer.<span class="title class_">Next</span>()) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (explorer.<span class="title class_">Init</span>(face2, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_EDGE</span>, oc.<span class="property">TopAbs_ShapeEnum</span>.<span class="property">TopAbs_SHAPE</span>); explorer.<span class="title class_">More</span>(); explorer.<span class="title class_">Next</span>()) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 销毁迭代器</span></span><br><span class="line">explorer.<span class="title function_">delete</span>()</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
 </div>
-            
         </section>
+
     </div>
 </div>
+
 
 </div>
 
