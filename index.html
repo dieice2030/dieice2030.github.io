@@ -112,7 +112,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -140,6 +140,85 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/12/03/%E4%BD%BF%E7%94%A8opencv-js%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F%E8%BF%9E%E9%80%9A%E5%9F%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="dieice2030">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dieice2030">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | dieice2030">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/12/03/%E4%BD%BF%E7%94%A8opencv-js%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F%E8%BF%9E%E9%80%9A%E5%9F%9F/" class="post-title-link" itemprop="url">使用opencv.js处理图像连通域</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-12-03 20:05:59 / 修改时间：20:41:08" itemprop="dateCreated datePublished" datetime="2024-12-03T20:05:59+08:00">2024-12-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>项目上用到了segmentAnything，得到的蒙版有可能会有一些小的干扰区域，这个时候可以通过计算连通域，剔除掉脱离主体的干扰部分，主要用到opencv的
+[connectedComponentsWithStats]函数(https://docs.opencv.org/3.4/d3/dc0/group__imgproc__shape.html#gae57b028a2b2ca327227c2399a9d53241)</p>
+<p>js中的函数声明 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This is an overloaded member function, provided for convenience. It differs from the above function</span></span><br><span class="line"><span class="comment"> * only in what argument(s) it accepts.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> image the 8-bit single-channel image to be labeled</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> labels destination labeled image</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> stats statistics output for each label, including the background label, see below for</span></span><br><span class="line"><span class="comment"> * available statistics. Statistics are accessed via stats(label, COLUMN) where COLUMN is one of</span></span><br><span class="line"><span class="comment"> * ConnectedComponentsTypes. The data type is CV_32S.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> centroids centroid output for each label, including the background label. Centroids are</span></span><br><span class="line"><span class="comment"> * accessed via centroids(label, 0) for x and centroids(label, 1) for y. The data type CV_64F.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> connectivity 8 or 4 for 8-way or 4-way connectivity respectively</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ltype output image label type. Currently CV_32S and CV_16U are supported.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">declare</span> <span class="keyword">function</span> <span class="title function_">connectedComponentsWithStats</span>(<span class="params">image: InputArray, labels: OutputArray, stats: OutputArray, centroids: OutputArray, connectivity?: int, ltype?: int</span>): int;</span><br></pre></td></tr></table></figure></p>
+<p>假设输入是1024*768的图像<br />
+<code>image</code> 是输入图像, Uint8的Mat，尺寸为1024*768*4
+<code>labels</code> 是输出结果，Int32的Mat， 尺寸为1024*768<br />
+<code>stats</code> 是每个连通域的信息，大小为 <code>连通域数量</code>*
+5，每个<code>row</code>分别是长度为5的数组，分别记录了连通域外接矩形左上角像素点的<code>x</code>，<code>y</code>，<code>宽度</code>，<code>高度</code>和<code>连通域的面积</code><br />
+<code>centroids</code> 是连通域的中心点坐标</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 将原始蒙版转化为灰度图像</span></span><br><span class="line"><span class="keyword">const</span> grayIm = <span class="keyword">new</span> cv.<span class="title class_">Mat</span>();</span><br><span class="line">cv.<span class="title function_">cvtColor</span>(im, grayIm, cv.<span class="property">COLOR_BGR2GRAY</span>);</span><br><span class="line"><span class="comment">// 2. 得到连通域</span></span><br><span class="line"><span class="keyword">const</span> labels = <span class="keyword">new</span> cv.<span class="title class_">Mat</span>();</span><br><span class="line"><span class="keyword">const</span> stats = <span class="keyword">new</span> cv.<span class="title class_">Mat</span>();</span><br><span class="line"><span class="keyword">const</span> centroids = <span class="keyword">new</span> cv.<span class="title class_">Mat</span>();</span><br><span class="line"><span class="keyword">const</span> cnt = cv.<span class="title function_">connectedComponentsWithStats</span>(grayIm, labels, stats, centroids, <span class="number">8</span>);</span><br><span class="line"><span class="keyword">const</span> miniAreaIndexes = [];</span><br><span class="line"><span class="comment">// 3. 计算总面积</span></span><br><span class="line"><span class="keyword">let</span> totalArea = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; cnt; i++) &#123;</span><br><span class="line">  <span class="keyword">const</span> area = stats.<span class="title function_">row</span>(i).<span class="property">data32S</span>[<span class="number">4</span>];</span><br><span class="line">  <span class="keyword">if</span> (i !== <span class="number">0</span>) totalArea += area;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 4. 记录需要过滤的连通域index</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; cnt; i++) &#123;</span><br><span class="line">  <span class="keyword">const</span> area = stats.<span class="title function_">row</span>(i).<span class="property">data32S</span>[<span class="number">4</span>];</span><br><span class="line">  <span class="comment">// stats.row(0)表示的是整个原始蒙版背景</span></span><br><span class="line">  <span class="comment">// 这里判断需要过滤的连通域标准是：面积小于原始蒙版面积的1%且小于所有连通域平均面积的10%</span></span><br><span class="line">  <span class="keyword">if</span> (area &lt; stats.<span class="title function_">row</span>(<span class="number">0</span>).<span class="property">data32S</span>[<span class="number">4</span>] * <span class="number">0.01</span> &amp;&amp; area &lt; (totalArea / cnt) * <span class="number">0.1</span>) &#123;</span><br><span class="line">    miniAreaIndexes.<span class="title function_">push</span>(i);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//5.将原始蒙版中不符合要求的部分剔除</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; labels.<span class="property">data32S</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">const</span> label = labels.<span class="property">data32S</span>.<span class="title function_">at</span>(i);</span><br><span class="line">  <span class="keyword">if</span> (miniAreaIndexes.<span class="title function_">includes</span>(label) &amp;&amp; label !== <span class="number">0</span>) &#123;</span><br><span class="line">    im.<span class="property">data</span>.<span class="title function_">set</span>([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>], i * <span class="number">4</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -177,9 +256,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-06-13 13:52:36 / 修改时间：15:45:38" itemprop="dateCreated datePublished" datetime="2024-06-13T13:52:36+08:00">2024-06-13</time>
+      <time title="创建时间：2024-06-13 13:52:36" itemprop="dateCreated datePublished" datetime="2024-06-13T13:52:36+08:00">2024-06-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-20 11:37:52" itemprop="dateModified" datetime="2024-06-20T11:37:52+08:00">2024-06-20</time>
     </span>
 
   
@@ -276,10 +361,13 @@ sin\theta &amp; cos\theta &amp; 0 &amp; 0 \\
 <ul>
 <li>保持Shape的类型</li>
 <li>保留变换矩阵，存储在Shape的<code>Location</code>中</li>
+<li>本质上是修改Shape的Location，在Shape本身已有Location变换的情况下，省去了额外的计算</li>
 <li>速度快</li>
+<li>缩放只能能比缩放</li>
 </ul>
 <h3 id="brepbuilderapi_gtransform">BRepBuilderAPI_GTransform</h3>
 <ul>
+<li>缩放可以任意比例缩放</li>
 <li>Shape的类型有可能发生改变
 (例如Line变成Spline，Plane变成SplineFae)</li>
 <li>不保留变换矩阵</li>
@@ -1031,104 +1119,6 @@ Models</p>
 &gt;public XXXContext(DbContextOptions<XXXContext> options) :
 base(options) { }</p>
 <p>其中XXX为数据库名称</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/HS-Project%EF%BC%88%E4%B8%80%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="dieice2030">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dieice2030">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | dieice2030">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/03/22/HS-Project%EF%BC%88%E4%B8%80%EF%BC%89/" class="post-title-link" itemprop="url">HS Project（一）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-03-22 13:44:44" itemprop="dateCreated datePublished" datetime="2018-03-22T13:44:44+08:00">2018-03-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-21 10:29:39" itemprop="dateModified" datetime="2023-06-21T10:29:39+08:00">2023-06-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92/" itemprop="url" rel="index"><span itemprop="name">项目计划</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>网页版炉石助手计划</p>
-<h1 id="目标">目标</h1>
-<ol type="1">
-<li>设计UI（包括选择对手的职业与卡组、选择自己的职业与卡组，记录对战细节情况（可选））（纯手动输入）</li>
-<li>数据系统（备选方案：MYSql、XML）</li>
-<li>实现功能
-<ul>
-<li>显示自己某职业与其他各职业的胜率情况（饼图或者柱形图）</li>
-<li>显示自己某职业与其他卡组的胜率情况（饼图或者柱形图）</li>
-<li>选定时间段呈现上述数据</li>
-<li>显示自己各职业的整体胜率情况（自己各职业的相互对比）</li>
-<li>显示自己各卡组的整体胜率情况（自己个卡组的相互对比）</li>
-</ul></li>
-</ol>
 
       
     </div>
